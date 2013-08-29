@@ -1,6 +1,10 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
+/PercolationAssignment/build/
+/PercolationAssignment/nbproject/private/
+/PercolationAssignment/dist/
+
+*.zip
