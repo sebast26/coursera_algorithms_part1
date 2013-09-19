@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -11,6 +12,8 @@ import static org.junit.Assert.*;
  * @author sebast26
  */
 public class DequeTest {
+    
+    Deque emptyDeque;
     
     public DequeTest() {
     }
@@ -25,6 +28,7 @@ public class DequeTest {
     
     @Before
     public void setUp() {
+        emptyDeque = new Deque();
     }
     
     @After
@@ -35,95 +39,66 @@ public class DequeTest {
      * Test of isEmpty method, of class Deque.
      */
     @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        Deque instance = new Deque();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsEmptyWithEmptyDeque() {
+        assertTrue(emptyDeque.isEmpty());
     }
-
-    /**
-     * Test of size method, of class Deque.
-     */
+    
     @Test
-    public void testSize() {
-        System.out.println("size");
-        Deque instance = new Deque();
-        int expResult = 0;
-        int result = instance.size();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsEmptyWithOneFrontItem() {
+        emptyDeque.addFirst("seba");
+        assertFalse(emptyDeque.isEmpty());
+    }
+    
+    @Test
+    public void testIsEmptyWithOneEndItem() {
+        emptyDeque.addLast("seba");
+        assertFalse(emptyDeque.isEmpty());
+    }
+    
+    @Test
+    public void testIsEmptyWithAddAndRemoveFromFront() {
+        emptyDeque.addFirst("seba");
+        emptyDeque.removeFirst();
+        assertTrue(emptyDeque.isEmpty());
+    }
+    
+    @Test
+    public void testIsEmptyWithAddAndRemoveFromEnd() {
+        emptyDeque.addLast("seba");
+        emptyDeque.removeLast();
+        assertTrue(emptyDeque.isEmpty());
+    }
+    
+    @Test
+    public void testIsEmptyWithAddAndRemoveFromBoth() {
+        emptyDeque.addFirst("seba");
+        emptyDeque.addLast("seba");
+        emptyDeque.removeFirst();
+        emptyDeque.removeLast();
+        assertTrue(emptyDeque.isEmpty());
     }
 
     /**
      * Test of addFirst method, of class Deque.
      */
-    @Test
-    public void testAddFirst() {
-        System.out.println("addFirst");
-        Object item = null;
-        Deque instance = new Deque();
-        instance.addFirst(item);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test(expected = NullPointerException.class)
+    public void testAddFirstWithNullItem() {
+        emptyDeque.addFirst(null);
     }
-
-    /**
-     * Test of addLast method, of class Deque.
-     */
-    @Test
-    public void testAddLast() {
-        System.out.println("addLast");
-        Object item = null;
-        Deque instance = new Deque();
-        instance.addLast(item);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    @Test(expected = NullPointerException.class)
+    public void testAddLastWithNullItem() {
+        emptyDeque.addLast(null);
     }
-
-    /**
-     * Test of removeFirst method, of class Deque.
-     */
-    @Test
-    public void testRemoveFirst() {
-        System.out.println("removeFirst");
-        Deque instance = new Deque();
-        Object expResult = null;
-        Object result = instance.removeFirst();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testRemoveFirstOnEmptyDeque() {
+        emptyDeque.removeFirst();
     }
-
-    /**
-     * Test of removeLast method, of class Deque.
-     */
-    @Test
-    public void testRemoveLast() {
-        System.out.println("removeLast");
-        Deque instance = new Deque();
-        Object expResult = null;
-        Object result = instance.removeLast();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testRemoveLastOnEmptyDeque() {
+        emptyDeque.removeLast();
     }
-
-    /**
-     * Test of iterator method, of class Deque.
-     */
-    @Test
-    public void testIterator() {
-        System.out.println("iterator");
-        Deque instance = new Deque();
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 }
