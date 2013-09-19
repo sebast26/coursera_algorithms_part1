@@ -194,7 +194,7 @@ public class Deque<Item> implements Iterable<Item> {
         
         System.out.println("------------");
         
-        Deque<String> mixedDeque = new Deque<>();
+        Deque<String> mixedDeque = new Deque<String>();
         mixedDeque.addFirst("seba");
         mixedDeque.addLast("last");
         for (String i : mixedDeque) {
@@ -236,7 +236,7 @@ public class Deque<Item> implements Iterable<Item> {
             System.out.println(i);
         }
         
-        Deque<String> testDeque = new Deque<>();
+        Deque<String> testDeque = new Deque<String>();
         testDeque.addFirst("test");
         Iterator<String> iter = testDeque.iterator();
         String t = iter.next();
