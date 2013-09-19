@@ -86,6 +86,31 @@ public class DequeTest {
         emptyDeque.addFirst(null);
     }
     
+    @Test
+    public void testAddFirstWithSingleItem() {
+        emptyDeque.addFirst("seba");
+        assertFalse(emptyDeque.isEmpty());
+        assertEquals(1, emptyDeque.size());
+        Iterator iter = emptyDeque.iterator();
+        assertTrue(iter.hasNext());
+        assertEquals("seba", (String) iter.next());
+    }
+    
+    @Test
+    public void testAddFirstWithTwoItems() {
+        emptyDeque.addFirst("first");
+        emptyDeque.addFirst("second");
+        assertFalse(emptyDeque.isEmpty());
+        assertEquals(2, emptyDeque.size());
+        Iterator iter = emptyDeque.iterator();
+        assertTrue(iter.hasNext());
+        assertEquals("second", (String) iter.next());
+        assertTrue(iter.hasNext());
+        assertEquals("first", (String) iter.next());
+        assertFalse(iter.hasNext());
+    }
+    
+    
     @Test(expected = NullPointerException.class)
     public void testAddLastWithNullItem() {
         emptyDeque.addLast(null);

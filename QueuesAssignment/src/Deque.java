@@ -21,6 +21,28 @@ public class Deque<Item> implements Iterable<Item> {
      * end of the deque.
      */
     private Node end;
+
+    private class DequeListIterator implements Iterator<Item> {
+
+        private Node current = front;
+        
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("Remove in iterator is not supported!");
+        }
+    }
     
     /**
      * helper linked-list class
@@ -148,17 +170,70 @@ public class Deque<Item> implements Iterable<Item> {
      * @return 
      */
     public Iterator<Item> iterator() {
-        return null;
+        return new DequeListIterator();
     }
     
     public static void main(String[] args) {
-        Deque emptyDeque = new Deque();
+        Deque<String> emptyDeque = new Deque();
         emptyDeque.addLast("seba");
         emptyDeque.addLast("seba2");
         emptyDeque.addLast("seba3");
+        for (String i : emptyDeque) {
+            System.out.println(i);
+        }
         emptyDeque.removeLast();
+        for (String i : emptyDeque) {
+            System.out.println(i);
+        }
         emptyDeque.removeLast();
+        for (String i : emptyDeque) {
+            System.out.println(i);
+        }        
         emptyDeque.removeLast();
+        
+        System.out.println("------------");
+        
+        Deque<String> mixedDeque = new Deque<>();
+        mixedDeque.addFirst("seba");
+        mixedDeque.addLast("last");
+        for (String i : mixedDeque) {
+            System.out.println(i);
+        }
+        
+        System.out.println("------------");
+        
+        mixedDeque.addFirst("first");
+        mixedDeque.addFirst("firstest");
+        mixedDeque.addLast("lastest");
+        for (String i : mixedDeque) {
+            System.out.println(i);
+        }
+        
+        System.out.println("-------------");
+        
+        mixedDeque.removeFirst();        
+        for (String i : mixedDeque) {
+            System.out.println(i);
+        }
+        
+        System.out.println("-------------");
+        
+        mixedDeque.removeFirst();
+        mixedDeque.removeLast();
+        mixedDeque.removeLast();
+        for (String i : mixedDeque) {
+            System.out.println(i);
+        }
+        
+        System.out.println("-------------");
+        
+        mixedDeque.removeFirst();
+        
+        System.out.println("-------------");
+        
+        for (String i : mixedDeque) {
+            System.out.println(i);
+        }
     }
     
     /**
