@@ -13,3 +13,9 @@ Problem description: PercolationAssignment/doc
 
 Solution uses [WeightedQuickUnionUF](http://algs4.cs.princeton.edu/15uf/WeightedQuickUnionUF.java.html)
 algorithm and helper classes.
+
+Queues assignment
+-----------------
+Write a generic data type for a deque and a randomized queue. The goal of this assignment is to implement elementary data structures using arrays and linked lists, and to introduce you to generics and iterators.
+
+Problem description: QueuesAssignment/doc

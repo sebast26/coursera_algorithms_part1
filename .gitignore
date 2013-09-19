@@ -3,8 +3,11 @@
 # Package Files #
 *.war
 *.ear
+*.zip
+
 /PercolationAssignment/build/
 /PercolationAssignment/nbproject/private/
 /PercolationAssignment/dist/
-
-*.zip
+/QueuesAssignment/build/
+/QueuesAssignment/nbproject/private/
+/QueuesAssignment/dist/
