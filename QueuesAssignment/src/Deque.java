@@ -33,6 +33,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (current == null) throw new NoSuchElementException("No more elements!");
             Item item = current.item;
             current = current.next;
             return item;
@@ -233,6 +234,24 @@ public class Deque<Item> implements Iterable<Item> {
         
         for (String i : mixedDeque) {
             System.out.println(i);
+        }
+        
+        Deque<String> testDeque = new Deque<>();
+        testDeque.addFirst("test");
+        Iterator<String> iter = testDeque.iterator();
+        String t = iter.next();
+        try {
+            iter.next();
+        } catch (NoSuchElementException e) {
+            System.out.println("Exception correctly catched!");
+        }
+        
+        testDeque.addLast("test2");
+        for (String i : testDeque) {
+            System.out.println(i + ":");
+            for (String i2 : testDeque) {
+                System.out.println("\t" + i2);
+            }
         }
     }
     
