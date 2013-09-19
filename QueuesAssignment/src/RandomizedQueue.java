@@ -1,5 +1,6 @@
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -9,26 +10,36 @@ import java.util.Iterator;
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
     /**
-     * construct an empty randomized queue
+     * array of items.
+     */
+    private Item[] array;
+    /**
+     * number of elements on randomized queue.
+     */
+    private int n;
+    
+    /**
+     * construct an empty randomized queue.
      */
     public RandomizedQueue() {
-        
+        array = (Item[]) new Object[2];
     }
 
     /**
      * is the queue empty?
-     * @return 
+     * @return      <code>true</code> is randomized queue is empty
+     *              <code>false</code> otherwise.
      */
     public boolean isEmpty() {
-        return false;
+        return n == 0;
     }
 
     /**
-     * return the number of items on the queue
-     * @return 
+     * return the number of items on the queue.
+     * @return      size of the randomized queue
      */
     public int size() {
-        return 0;
+        return n;
     }
 
 
@@ -37,7 +48,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @param item 
      */
     public void enqueue(Item item) {
-        
+        if (item == null) throw new NullPointerException("Item cannot be null!");
     }
 
     /**
@@ -45,6 +56,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return 
      */
     public Item dequeue() {
+        if (isEmpty()) throw new NoSuchElementException("Cannot delete item from empty queue!");
+        
         return null;
     }
 
@@ -53,6 +66,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return 
      */
     public Item sample() {
+        if (isEmpty()) throw new NoSuchElementException("Cannot delete item from empty queue!");
+        
         return null;
     }
 
@@ -61,7 +76,29 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return 
      */
     public Iterator<Item> iterator() {
-        return null;
+        return new RandomizedQueueIterator();
+    }
+
+    private class RandomizedQueueIterator implements Iterator<Item> {
+
+        public RandomizedQueueIterator() {
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Item next() {
+            if (false) throw new NoSuchElementException("There is no more elements!");
+            return null;
+        }
+
+        @Override
+        public void remove() {
+                throw new UnsupportedOperationException("Not supported method.");
+        }
     }
 
 }
