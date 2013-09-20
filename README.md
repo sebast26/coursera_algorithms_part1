@@ -3,6 +3,8 @@ coursera_algorithms_part1
 
 Repository for code written in Coursera Algorithms Part 1 course.
 
+Book with algorithms available at [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/).
+
 
 Percolation assignment
 ----------------------

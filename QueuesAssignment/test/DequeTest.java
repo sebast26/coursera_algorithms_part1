@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class DequeTest {
     
-    Deque emptyDeque;
+    private Deque emptyDeque;
     
     public DequeTest() {
     }

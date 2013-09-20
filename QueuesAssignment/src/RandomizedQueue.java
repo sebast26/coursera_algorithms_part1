@@ -44,21 +44,43 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 
     /**
-     * add the item
-     * @param item 
+     * add the item.
+     * @param item      item to add.
      */
     public void enqueue(Item item) {
         if (item == null) throw new NullPointerException("Item cannot be null!");
+        
+        if (n == array.length) {
+            // double size of array if necessary
+            resize(2 * array.length);
+        }
+        // add item
+        array[n++] = item;
     }
 
     /**
-     * delete and return a random item
-     * @return 
+     * delete and return a random item.
+     * @return      random item from Randomized queue.
      */
     public Item dequeue() {
-        if (isEmpty()) throw new NoSuchElementException("Cannot delete item from empty queue!");
+        if (isEmpty()) {
+            throw new NoSuchElementException("Cannot delete item from empty queue!");
+        }
         
-        return null;
+        int indexToRemove = StdRandom.uniform(n);
+        
+        Item item = array[indexToRemove];
+        // make algorithm fast we raplace randomly removed item
+        // with last item in structure
+        array[indexToRemove] = array[n - 1];
+        // to avoid loitering
+        array[n - 1] = null;
+        n--;
+
+        // shrink size of array if necessary
+        if (n > 0 && n == array.length / 4) resize(array.length / 2);
+
+        return item;
     }
 
     /**
@@ -66,9 +88,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return 
      */
     public Item sample() {
-        if (isEmpty()) throw new NoSuchElementException("Cannot delete item from empty queue!");
+        if (isEmpty()) {
+            throw new NoSuchElementException("Cannot delete item from empty queue!");
+        }
         
-        return null;
+        int randomIndex = StdRandom.uniform(n);
+        
+        return array[randomIndex];
     }
 
     /**
@@ -81,18 +107,32 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RandomizedQueueIterator implements Iterator<Item> {
 
+        private boolean[] visitedItem = new boolean[n];
+        private int visitedItemCount = 0;
+        
         public RandomizedQueueIterator() {
         }
 
         @Override
         public boolean hasNext() {
-            return false;
+            return visitedItemCount < n;
         }
 
         @Override
         public Item next() {
-            if (false) throw new NoSuchElementException("There is no more elements!");
-            return null;
+            if (!hasNext()) {
+                throw new NoSuchElementException("There is no more elements!");
+            }
+            
+            int randomIndex = StdRandom.uniform(n);
+            while (visitedItem[randomIndex]) {
+                randomIndex = StdRandom.uniform(n);
+            }
+            
+            visitedItem[randomIndex] = true;
+            visitedItemCount++;
+            
+            return array[randomIndex];
         }
 
         @Override
@@ -101,4 +141,44 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
     }
 
+    private void resize(int capacity) {
+        assert capacity >= n;
+        Item[] temp = (Item[]) new Object[capacity];
+        for (int i = 0; i < n; i++) {
+            temp[i] = array[i];
+        }
+        array = temp;
+    }
+
+    public static void main(String[] args) {
+        RandomizedQueue<Integer> queue = new RandomizedQueue<Integer>();
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        System.out.println(queue.dequeue());
+        System.out.println(queue.dequeue());
+        
+        System.out.println("---------------");
+        
+        queue = new RandomizedQueue<Integer>();
+        queue.enqueue(5);
+        queue.enqueue(6);
+        queue.enqueue(7);
+        
+//        Iterator<Integer> iter = queue.iterator();
+//        boolean hasNext = iter.hasNext();
+//        Integer i = iter.next();
+        
+        for (int i : queue) {
+            System.out.println(i);
+        }
+        System.out.println("---------------");
+        for (int i : queue) {
+            System.out.println(i);
+        }
+        System.out.println("---------------");
+        for (int i : queue) {
+            System.out.println(i);
+        }
+    }
 }

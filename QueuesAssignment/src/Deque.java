@@ -33,7 +33,9 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if (current == null) throw new NoSuchElementException("No more elements!");
+            if (current == null) {
+                throw new NoSuchElementException("No more elements!");
+            }
             Item item = current.item;
             current = current.next;
             return item;
@@ -41,7 +43,8 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Remove in iterator is not supported!");
+            throw new UnsupportedOperationException("Remove in iterator is not"
+                                                    + " supported!");
         }
     }
     
@@ -239,7 +242,7 @@ public class Deque<Item> implements Iterable<Item> {
         Deque<String> testDeque = new Deque<String>();
         testDeque.addFirst("test");
         Iterator<String> iter = testDeque.iterator();
-        String t = iter.next();
+        iter.next();
         try {
             iter.next();
         } catch (NoSuchElementException e) {
