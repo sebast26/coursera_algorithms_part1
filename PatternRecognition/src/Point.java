@@ -15,6 +15,9 @@ public class Point implements Comparable<Point> {
 
         @Override
         public int compare(Point t, Point t1) {
+            if (t == null || t1 == null) {
+                throw new NullPointerException();
+            }
             if (slopeTo(t) < slopeTo(t1)) {
                 return -1;
             } else if (slopeTo(t) > slopeTo(t1)) {
@@ -89,7 +92,8 @@ public class Point implements Comparable<Point> {
      * @return 
      */
     public double slopeTo(Point that) {
-        if (this == that) {
+        if (that == null) throw new NullPointerException("Cound not compute slope with point being null!");
+        if (this.x == that.x && this.y == that.y) {
             return Double.NEGATIVE_INFINITY;
         } else if (this.x == that.x) {
             return Double.POSITIVE_INFINITY;
@@ -101,11 +105,9 @@ public class Point implements Comparable<Point> {
     }
     
     public static void main(String[] args) {
-        Point p = new Point(19000, 10000);
-        Point q = new Point(18000, 10000);
+        Point p = new Point(6, 2);
+        Point q = new Point(6, 2);
         
-        System.out.println(p.compareTo(q));
         System.out.println(p.slopeTo(q));
-        System.out.println(q.slopeTo(q));
     }
 }
